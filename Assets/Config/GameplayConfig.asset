@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e8a3127aca9e9a40a3a2823afd25ed9, type: 3}
   m_Name: GameplayConfig
   m_EditorClassIdentifier: 
+  criticalItem: Bullet
   enemySpawnDelay: 10
   enemySpawnCount: 2
-  criticalItem: Bullet
+  buttonHoldTime: 0.5

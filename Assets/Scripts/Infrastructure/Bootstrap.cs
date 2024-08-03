@@ -29,7 +29,7 @@ namespace Platformer
         private void Awake()
         {
             //Initialization
-            input = new();
+            input = new(gameplayConfig);
             itemSpawner = new(allItemsConfig);
             bulletSpawner = new();
             playerSpawner = new(spawnConfig.playerPrefab, playerSpawnPoint, input, bulletSpawner);

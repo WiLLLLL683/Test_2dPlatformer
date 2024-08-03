@@ -10,4 +10,5 @@ public class GameplayConfig : ScriptableObject
     public string criticalItem;
     public float enemySpawnDelay;
     public int enemySpawnCount;
+    public float buttonHoldTime;
 }

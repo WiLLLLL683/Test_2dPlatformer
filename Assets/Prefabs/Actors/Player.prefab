@@ -146,7 +146,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7683374911347875814, guid: 182008135dc073a4499247533cb51034, type: 3}
   gunPoint: {fileID: 3435043832360294835}
   damage: 100
-  delay: 0.15
+  delay: 0.1
 --- !u!114 &5450233961025937160
 MonoBehaviour:
   m_ObjectHideFlags: 0

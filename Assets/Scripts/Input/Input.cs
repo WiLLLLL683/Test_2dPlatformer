@@ -11,13 +11,14 @@ namespace Platformer
         public event Action OnShootBurstInput;
         public event Action<Vector2> OnMoveInput;
 
-        private const float burstShootPressTime = 0.5f;
-        private float shootPressedTimer;
-
+        private readonly GameplayConfig config;
         private readonly GameControls controls;
 
-        public Input()
+        private float shootPressedTimer;
+
+        public Input(GameplayConfig config)
         {
+            this.config = config;
             controls = new();
         }
 
@@ -51,7 +52,7 @@ namespace Platformer
             }
         }
 
-        private void ShootPressed(InputAction.CallbackContext obj) => shootPressedTimer = burstShootPressTime;
+        private void ShootPressed(InputAction.CallbackContext obj) => shootPressedTimer = config.buttonHoldTime;
         private void ShootUnPressed(InputAction.CallbackContext obj)
         {
             if (shootPressedTimer > 0)
