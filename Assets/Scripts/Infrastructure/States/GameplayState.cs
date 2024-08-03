@@ -13,13 +13,13 @@ namespace Platformer
         private readonly EnemySpawner[] enemySpawners;
         private readonly HudUI hudUI;
         private readonly GameOverUI gameOverUI;
-
-        private const float ENEMY_SPAWN_DELAY = 10f;
+        private readonly GameplayConfig gameplayConfig;
 
         private float enemySpawnTimer;
         private Health playerHealth;
+        private ItemData criticalItem;
 
-        public GameplayState(StateMachine stateMachine, Input input, SceneManager sceneManager, PlayerSpawner playerSpawner, EnemySpawner[] enemySpawners, HudUI hudUI, GameOverUI gameOverUI)
+        public GameplayState(StateMachine stateMachine, Input input, SceneManager sceneManager, PlayerSpawner playerSpawner, EnemySpawner[] enemySpawners, HudUI hudUI, GameOverUI gameOverUI, GameplayConfig gameplayConfig)
         {
             this.stateMachine = stateMachine;
             this.input = input;
@@ -28,6 +28,7 @@ namespace Platformer
             this.enemySpawners = enemySpawners;
             this.hudUI = hudUI;
             this.gameOverUI = gameOverUI;
+            this.gameplayConfig = gameplayConfig;
         }
 
         public void OnEnter()
@@ -36,21 +37,36 @@ namespace Platformer
 
             //spawn actors
             Player player = playerSpawner.Spawn();
-            SpawnEnemy();
+            SpawnEnemies();
 
             //Init UI
             InventoryBase playerInventory = player.gameObject.GetComponent<InventoryBase>();
             hudUI.Init(playerInventory);
             gameOverUI.Init(sceneManager);
 
-            //setup gameover conditions
+            //gameover on player die
             playerHealth = player.gameObject.GetComponent<Health>();
             playerHealth.OnDeath += GameOver;
+
+            //gameover on criticalItem empty
+            if (playerInventory.TryGetItem(gameplayConfig.criticalItem, out ItemData criticalItem))
+            {
+                this.criticalItem = criticalItem;
+                criticalItem.OnAmountChange += CheckCriticalItemAmount;
+            }
+            else
+            {
+                GameOver();
+            }
         }
 
         public void OnExit()
         {
             playerHealth.OnDeath -= GameOver;
+            if (criticalItem != null)
+            {
+                criticalItem.OnAmountChange -= CheckCriticalItemAmount;
+            }
         }
 
         public void OnUpdate()
@@ -59,15 +75,26 @@ namespace Platformer
 
             if (enemySpawnTimer <= 0)
             {
-                SpawnEnemy();
+                SpawnEnemies();
             }
         }
 
-        private void SpawnEnemy()
+        private void SpawnEnemies()
         {
-            int random = UnityEngine.Random.Range(0, enemySpawners.Length);
-            enemySpawners[random].Spawn();
-            enemySpawnTimer = ENEMY_SPAWN_DELAY;
+            for (int i = 0; i < gameplayConfig.enemySpawnCount; i++)
+            {
+                int random = UnityEngine.Random.Range(0, enemySpawners.Length);
+                enemySpawners[random].Spawn();
+            }
+
+            enemySpawnTimer = gameplayConfig.enemySpawnDelay;
+        }
+        private void CheckCriticalItemAmount(int amount)
+        {
+            if (amount <= 0)
+            {
+                GameOver();
+            }
         }
 
         private void GameOver() => stateMachine.EnterState<GameOverState>();

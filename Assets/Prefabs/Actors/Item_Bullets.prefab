@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2152342172048904029}
   - component: {fileID: 4230937860251127746}
   - component: {fileID: 3138209186918490411}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Item_Bullets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemData:
-    Name: Bullet
+    Id: Bullet
     amount: 10
 --- !u!212 &2152342172048904029
 SpriteRenderer:
