@@ -6,36 +6,37 @@ namespace Platformer
 {
     public class Player : MonoBehaviour
     {
-        [SerializeField] private float speed;
+        [SerializeField] private MovementBase movement;
+        [SerializeField] private HealthBase health;
+        [SerializeField] private AttackBase singleAttack;
+        [SerializeField] private AttackBase burstAttack;
 
         private Input input;
 
         public void Init(Input input)
         {
             this.input = input;
-            input.OnMoveInput += Move;
+
+            input.OnMoveInput += movement.Move;
             input.OnShootInput += ShootSingle;
             input.OnShootBurstInput += ShootBurst;
         }
+
         private void OnDestroy()
         {
-            input.OnMoveInput -= Move;
+            input.OnMoveInput -= movement.Move;
             input.OnShootInput -= ShootSingle;
             input.OnShootBurstInput -= ShootBurst;
         }
 
-        private void Move(Vector2 inputDirection)
-        {
-            Vector3 direction = new(inputDirection.x, 0, 0);
-            transform.position += Time.deltaTime * speed * direction;
-        }
         private void ShootSingle()
         {
-            Debug.Log("Single Shoot");
+            singleAttack.Attack(transform.right);
         }
+
         private void ShootBurst()
         {
-            Debug.Log("Burst Shoot");
+            burstAttack.Attack(transform.right);
         }
     }
 }
