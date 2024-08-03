@@ -7,6 +7,8 @@ namespace Platformer
     public class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private Enemy prefab;
+        [SerializeField] private float minMoveSpeed;
+        [SerializeField] private float maxMoveSpeed;
 
         private List<Enemy> enemies = new();
 
@@ -17,8 +19,9 @@ namespace Platformer
         public Enemy Spawn()
         {
             Enemy enemy = Instantiate(prefab, transform.position, Quaternion.identity);
+            float moveSpeed = UnityEngine.Random.Range(minMoveSpeed, maxMoveSpeed);
+            enemy.Init(moveSpeed);
             enemies.Add(enemy);
-            enemy.Init();
             return enemy;
         }
 

@@ -368,6 +368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8146699001757870382, guid: 1d9f723ae32866246a6b1011a64277ac, type: 3}
+  minMoveSpeed: 2
+  maxMoveSpeed: 8
 --- !u!1 &142362127
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +583,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8146699001757870382, guid: 1d9f723ae32866246a6b1011a64277ac, type: 3}
+  minMoveSpeed: 2
+  maxMoveSpeed: 8
 --- !u!1 &260507272
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,6 +1771,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8146699001757870382, guid: 1d9f723ae32866246a6b1011a64277ac, type: 3}
+  minMoveSpeed: 2
+  maxMoveSpeed: 8
 --- !u!1 &1036836304
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,6 +2789,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8146699001757870382, guid: 1d9f723ae32866246a6b1011a64277ac, type: 3}
+  minMoveSpeed: 2
+  maxMoveSpeed: 8
 --- !u!1 &1926870724
 GameObject:
   m_ObjectHideFlags: 0
@@ -2866,6 +2874,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 8146699001757870382, guid: 1d9f723ae32866246a6b1011a64277ac, type: 3}
+  minMoveSpeed: 2
+  maxMoveSpeed: 8
 --- !u!1 &1968514795
 GameObject:
   m_ObjectHideFlags: 0

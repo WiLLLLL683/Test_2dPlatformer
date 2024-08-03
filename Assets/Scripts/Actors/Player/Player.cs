@@ -13,6 +13,7 @@ namespace Platformer
         [SerializeField] private InventoryBase inventory;
 
         private Input input;
+        private bool isEnabled;
 
         public void Init(Input input)
         {
@@ -30,6 +31,10 @@ namespace Platformer
 
         public void Enable()
         {
+            if (isEnabled)
+                return;
+
+            isEnabled = true;
             input.OnMoveInput += movement.Move;
             input.OnShootInput += ShootSingle;
             input.OnShootBurstInput += ShootBurst;
@@ -38,6 +43,10 @@ namespace Platformer
 
         public void Disable()
         {
+            if (!isEnabled)
+                return;
+
+            isEnabled = false;
             input.OnMoveInput -= movement.Move;
             input.OnShootInput -= ShootSingle;
             input.OnShootBurstInput -= ShootBurst;
@@ -46,9 +55,6 @@ namespace Platformer
 
         private void ShootSingle() => singleAttack.Attack(transform.right);
         private void ShootBurst() => burstAttack.Attack(transform.right);
-        private void OnDeath()
-        {
-            Disable();
-        }
+        private void OnDeath() => Disable();
     }
 }

@@ -16,5 +16,7 @@ namespace Platformer
             Vector3 direction = new(inputDirection.x, 0, 0);
             transform.position += Time.deltaTime * speed * direction;
         }
+
+        public override void SetSpeed(float speed) => this.speed = speed;
     }
 }

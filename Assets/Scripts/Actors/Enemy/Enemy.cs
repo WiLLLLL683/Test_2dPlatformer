@@ -15,23 +15,23 @@ namespace Platformer
         [SerializeField] private LayerMask targetLayer;
 
         private Transform target;
+        private bool isEnabled;
 
-        public void Init()
+        public void Init(float moveSpeed)
         {
-            health.OnDeath += OnDeath;
+            movement.SetSpeed(moveSpeed);
+            Enable();
         }
 
         private void OnDestroy()
         {
-            health.OnDeath -= OnDeath;
+            Disable();
         }
 
         private void Update()
         {
-            if (health.IsDead)
-            {
+            if (!isEnabled)
                 return;
-            }
 
             FindTarget();
 
@@ -39,6 +39,24 @@ namespace Platformer
             {
                 MoveToTarget();
             }
+        }
+
+        public void Enable()
+        {
+            if (isEnabled)
+                return;
+
+            isEnabled = true;
+            health.OnDeath += OnDeath;
+        }
+
+        public void Disable()
+        {
+            if (!isEnabled)
+                return;
+
+            isEnabled = false;
+            health.OnDeath -= OnDeath;
         }
 
         private void FindTarget()
@@ -69,7 +87,7 @@ namespace Platformer
 
         private void OnDeath()
         {
-            rigidbody2d.freezeRotation = false;
+            Destroy(gameObject);
             //TODO drop item
         }
     }
