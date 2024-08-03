@@ -6,6 +6,7 @@ namespace Platformer
 {
     public class Item : MonoBehaviour
     {
+        [Header("Current state")]
         [SerializeField] private ItemData itemData;
 
         public void Init(ItemData data)

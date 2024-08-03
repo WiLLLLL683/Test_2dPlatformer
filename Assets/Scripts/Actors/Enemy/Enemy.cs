@@ -7,23 +7,22 @@ namespace Platformer
 {
     public class Enemy : MonoBehaviour
     {
+        [Header("Components")]
         [SerializeField] private MovementBase movement;
         [SerializeField] private AttackBase attack;
         [SerializeField] private HealthBase health;
-        [SerializeField] private List<ItemData> dropItems;
-        [SerializeField] private int minDropAmount;
-        [SerializeField] private int maxDropAmount;
+        [SerializeField] private ItemDropBase itemDrop;
+        [Header("TargetDetection")]
         [SerializeField] private float targetDetectionRadius;
         [SerializeField] private LayerMask targetLayer;
 
-        private ItemSpawner itemSpawner;
         private Transform target;
         private bool isEnabled;
 
         public void Init(float moveSpeed, ItemSpawner itemSpawner)
         {
-            this.itemSpawner = itemSpawner;
-            movement.SetSpeed(moveSpeed);
+            itemDrop.Init(itemSpawner);
+            movement.Init(moveSpeed);
             Enable();
         }
 
@@ -91,16 +90,8 @@ namespace Platformer
 
         private void OnDeath()
         {
-            DropItem();
+            itemDrop.DropItem();
             Destroy(gameObject);
-        }
-
-        private void DropItem()
-        {
-            int random = Random.Range(0, dropItems.Count);
-            ItemData itemData = dropItems[random];
-            itemData.Amount = Random.Range(minDropAmount, maxDropAmount);
-            itemSpawner.Spawn(itemData, transform.position);
         }
     }
 }

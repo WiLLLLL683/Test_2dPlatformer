@@ -5,6 +5,6 @@ namespace Platformer
     public abstract class MovementBase: MonoBehaviour
     {
         public abstract void Move(Vector2 inputDirection);
-        public abstract void SetSpeed(float speed);
+        public abstract void Init(float speed);
     }
 }

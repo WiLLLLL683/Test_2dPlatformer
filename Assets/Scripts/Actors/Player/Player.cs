@@ -6,6 +6,7 @@ namespace Platformer
 {
     public class Player : MonoBehaviour
     {
+        [Header("Components")]
         [SerializeField] private MovementBase movement;
         [SerializeField] private HealthBase health;
         [SerializeField] private BulletAttackBase singleAttack;

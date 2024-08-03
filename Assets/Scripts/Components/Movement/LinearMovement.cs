@@ -11,14 +11,14 @@ namespace Platformer
     {
         [SerializeField] private float speed;
 
+        public override void Init(float speed) => this.speed = speed;
+
         public override void Move(Vector2 inputDirection)
         {
             Vector3 direction = new(inputDirection.x, 0, 0);
             transform.position += Time.deltaTime * speed * direction;
             FlipDirection(inputDirection);
         }
-
-        public override void SetSpeed(float speed) => this.speed = speed;
 
         private void FlipDirection(Vector2 inputDirection)
         {

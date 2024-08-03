@@ -6,6 +6,7 @@ namespace Platformer
 {
     public class Bullet : MonoBehaviour
     {
+        [Header("Components")]
         [SerializeField] private MovementBase movement;
 
         private Vector2 direction;
