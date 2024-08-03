@@ -25,8 +25,8 @@ namespace Platformer
             sceneManager = new();
 
             stateMachine.AddState(new InitState(stateMachine, input, playerSpawner, enemySpawners, itemSpawner));
-            stateMachine.AddState(new GameplayState(input, sceneManager, playerSpawner, enemySpawners, hudUI, gameOverUI));
-            stateMachine.AddState(new GameOverState());
+            stateMachine.AddState(new GameplayState(stateMachine, input, sceneManager, playerSpawner, enemySpawners, hudUI, gameOverUI));
+            stateMachine.AddState(new GameOverState(input, gameOverUI));
 
             stateMachine.EnterState<InitState>();
         }

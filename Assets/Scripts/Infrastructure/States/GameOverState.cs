@@ -5,9 +5,19 @@ namespace Platformer
 {
     class GameOverState : IState
     {
+        private readonly Input input;
+        private readonly GameOverUI gameOverUI;
+
+        public GameOverState(Input input, GameOverUI gameOverUI)
+        {
+            this.input = input;
+            this.gameOverUI = gameOverUI;
+        }
+
         public void OnEnter()
         {
-            //TODO Show gameover ui
+            input.Disable();
+            gameOverUI.Show();
         }
 
         public void OnExit()
