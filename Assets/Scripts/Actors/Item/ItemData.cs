@@ -6,7 +6,7 @@ namespace Platformer
     [System.Serializable]
     public class ItemData
     {
-        public string Name;
+        public string Id;
         public int Amount
         {
             get { return amount; }

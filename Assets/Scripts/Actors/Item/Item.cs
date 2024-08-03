@@ -8,6 +8,11 @@ namespace Platformer
     {
         [SerializeField] private ItemData itemData;
 
+        public void Init(ItemData data)
+        {
+            itemData = data;
+        }
+
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.TryGetComponent<InventoryBase>(out InventoryBase inventory))

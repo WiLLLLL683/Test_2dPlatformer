@@ -21,25 +21,25 @@ namespace Platformer
 
         public override void AddItem(ItemData item)
         {
-            if (items.TryGetValue(item.Name, out ItemData itemInInventory))
+            if (items.TryGetValue(item.Id, out ItemData itemInInventory))
             {
                 itemInInventory.Amount += item.Amount;
             }
             else
             {
-                items.Add(item.Name, item);
+                items.Add(item.Id, item);
             }
         }
 
-        public override bool TryGetItem(string name, out ItemData item)
+        public override bool TryGetItem(string id, out ItemData item)
         {
-            if (!items.ContainsKey(name))
+            if (!items.ContainsKey(id))
             {
                 item = null;
                 return false;
             }
 
-            item = items[name];
+            item = items[id];
             return true;
         }
     }

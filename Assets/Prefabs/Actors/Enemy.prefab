@@ -53,7 +53,11 @@ MonoBehaviour:
   movement: {fileID: 4415450067915287125}
   attack: {fileID: 8921398944995105762}
   health: {fileID: 4360171234245687884}
-  rigidbody2d: {fileID: 5155651219298053807}
+  dropItems:
+  - Id: Bullet
+    amount: 0
+  minDropAmount: 5
+  maxDropAmount: 20
   targetDetectionRadius: 25
   targetLayer:
     serializedVersion: 2

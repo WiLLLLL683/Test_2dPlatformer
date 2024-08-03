@@ -10,13 +10,15 @@ namespace Platformer
         private readonly Input input;
         private readonly PlayerSpawner playerSpawner;
         private readonly EnemySpawner[] enemySpawners;
+        private readonly ItemSpawner itemSpawner;
 
-        public InitState(StateMachine stateMachine, Input input, PlayerSpawner playerSpawner, EnemySpawner[] enemySpawners)
+        public InitState(StateMachine stateMachine, Input input, PlayerSpawner playerSpawner, EnemySpawner[] enemySpawners, ItemSpawner itemSpawner)
         {
             this.stateMachine = stateMachine;
             this.input = input;
             this.playerSpawner = playerSpawner;
             this.enemySpawners = enemySpawners;
+            this.itemSpawner = itemSpawner;
         }
 
         public void OnEnter()
@@ -25,7 +27,7 @@ namespace Platformer
             playerSpawner.Init(input);
             for (int i = 0; i < enemySpawners.Length; i++)
             {
-                enemySpawners[i].Init();
+                enemySpawners[i].Init(itemSpawner);
             }
 
             stateMachine.EnterState<GameplayState>();

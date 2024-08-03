@@ -11,16 +11,18 @@ namespace Platformer
         [SerializeField] private float maxMoveSpeed;
 
         private List<Enemy> enemies = new();
+        private ItemSpawner itemSpawner;
 
-        public void Init()
+        public void Init(ItemSpawner itemSpawner)
         {
-            // TODO: Add your implementation
+            this.itemSpawner = itemSpawner;
         }
+
         public Enemy Spawn()
         {
             Enemy enemy = Instantiate(prefab, transform.position, Quaternion.identity);
             float moveSpeed = UnityEngine.Random.Range(minMoveSpeed, maxMoveSpeed);
-            enemy.Init(moveSpeed);
+            enemy.Init(moveSpeed, itemSpawner);
             enemies.Add(enemy);
             return enemy;
         }

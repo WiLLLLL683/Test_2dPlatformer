@@ -2276,6 +2276,7 @@ MonoBehaviour:
   - {fileID: 1945173262}
   - {fileID: 195429538}
   hudUI: {fileID: 1373011592555192749}
+  allItemsConfig: {fileID: 11400000, guid: 0333b12a41beebd40ae73a8fe487e37c, type: 2}
 --- !u!4 &1351111626
 Transform:
   m_ObjectHideFlags: 0
