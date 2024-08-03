@@ -7,20 +7,24 @@ namespace Platformer
     class GameplayState : IState
     {
         private readonly Input input;
+        private readonly SceneManager sceneManager;
         private readonly PlayerSpawner playerSpawner;
         private readonly EnemySpawner[] enemySpawners;
         private readonly HudUI hudUI;
+        private readonly GameOverUI gameOverUI;
 
         private const float ENEMY_SPAWN_DELAY = 10f;
 
         private float enemySpawnTimer;
 
-        public GameplayState(Input input, PlayerSpawner playerSpawner, EnemySpawner[] enemySpawners, HudUI hudUI)
+        public GameplayState(Input input, SceneManager sceneManager, PlayerSpawner playerSpawner, EnemySpawner[] enemySpawners, HudUI hudUI, GameOverUI gameOverUI)
         {
             this.input = input;
+            this.sceneManager = sceneManager;
             this.playerSpawner = playerSpawner;
             this.enemySpawners = enemySpawners;
             this.hudUI = hudUI;
+            this.gameOverUI = gameOverUI;
         }
 
         public void OnEnter()
@@ -35,7 +39,7 @@ namespace Platformer
             InventoryBase inventory = player.gameObject.GetComponent<InventoryBase>();
             inventory.TryGetItem("Bullet", out ItemData bulletItem);
             hudUI.Init(bulletItem);
-
+            gameOverUI.Init(sceneManager);
         }
 
         private void SpawnEnemy()

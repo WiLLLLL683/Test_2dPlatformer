@@ -10,19 +10,22 @@ namespace Platformer
         [SerializeField] private PlayerSpawner playerSpawner;
         [SerializeField] private EnemySpawner[] enemySpawners;
         [SerializeField] private HudUI hudUI;
+        [SerializeField] private GameOverUI gameOverUI;
         [SerializeField] private ItemSetConfig allItemsConfig;
 
         private StateMachine stateMachine = new();
         private Input input;
         private ItemSpawner itemSpawner;
+        private SceneManager sceneManager;
 
         private void Awake()
         {
             input = new();
             itemSpawner = new(allItemsConfig);
+            sceneManager = new();
 
             stateMachine.AddState(new InitState(stateMachine, input, playerSpawner, enemySpawners, itemSpawner));
-            stateMachine.AddState(new GameplayState(input, playerSpawner, enemySpawners, hudUI));
+            stateMachine.AddState(new GameplayState(input, sceneManager, playerSpawner, enemySpawners, hudUI, gameOverUI));
             stateMachine.AddState(new GameOverState());
 
             stateMachine.EnterState<InitState>();
