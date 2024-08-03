@@ -22,9 +22,9 @@ namespace Platformer
             movement.Move(direction);
         }
 
-        private void OnCollisionEnter(Collision collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(collision.gameObject.TryGetComponent<IDamageble>(out IDamageble damageble))
+            if (collision.gameObject.TryGetComponent<IDamageble>(out IDamageble damageble))
             {
                 damageble.TakeDamage(damage);
             }

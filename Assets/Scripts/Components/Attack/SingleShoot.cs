@@ -18,7 +18,7 @@ namespace Platformer
 
         public override void Attack(Vector2 direction)
         {
-            if (inventory.TryGetItem("Bullet", out Item bulletItem) &&
+            if (inventory.TryGetItem("Bullet", out ItemData bulletItem) &&
                 bulletItem.Amount > 0)
             {
                 Bullet bullet = GameObject.Instantiate(bulletPrefab, gunPoint.position, Quaternion.identity);

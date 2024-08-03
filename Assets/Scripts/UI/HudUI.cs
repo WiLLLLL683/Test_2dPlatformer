@@ -9,9 +9,9 @@ namespace Platformer
     {
         [SerializeField] private TMP_Text bulletAmountText;
 
-        private Item bulletItem;
+        private ItemData bulletItem;
 
-        public void Init(Item bulletItem)
+        public void Init(ItemData bulletItem)
         {
             this.bulletItem = bulletItem;
 

@@ -31,7 +31,7 @@ namespace Platformer
 
             //Init UI
             InventoryBase inventory = player.gameObject.GetComponent<InventoryBase>();
-            inventory.TryGetItem("Bullet", out Item bulletItem);
+            inventory.TryGetItem("Bullet", out ItemData bulletItem);
             hudUI.Init(bulletItem);
 
         }

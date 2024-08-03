@@ -7,9 +7,9 @@ namespace Platformer
 {
     public class Inventory : InventoryBase
     {
-        [SerializeField] private List<Item> initialItems;
+        [SerializeField] private List<ItemData> initialItems;
 
-        private Dictionary<string, Item> items = new();
+        private Dictionary<string, ItemData> items = new();
 
         public override void Init()
         {
@@ -19,9 +19,9 @@ namespace Platformer
             }
         }
 
-        public override void AddItem(Item item)
+        public override void AddItem(ItemData item)
         {
-            if (items.TryGetValue(item.Name, out Item itemInInventory))
+            if (items.TryGetValue(item.Name, out ItemData itemInInventory))
             {
                 itemInInventory.Amount += item.Amount;
             }
@@ -31,7 +31,7 @@ namespace Platformer
             }
         }
 
-        public override bool TryGetItem(string name, out Item item)
+        public override bool TryGetItem(string name, out ItemData item)
         {
             if (!items.ContainsKey(name))
             {

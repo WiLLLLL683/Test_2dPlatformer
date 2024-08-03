@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Platformer
 {
     [System.Serializable]
-    public class Item
+    public class ItemData
     {
         public string Name;
         public int Amount
