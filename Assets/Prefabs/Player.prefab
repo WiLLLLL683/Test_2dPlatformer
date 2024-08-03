@@ -44,6 +44,8 @@ GameObject:
   - component: {fileID: 2490587018747254697}
   - component: {fileID: -8221289098585361994}
   - component: {fileID: -4811866425717969270}
+  - component: {fileID: 6251089767089595006}
+  - component: {fileID: 5450233961025937160}
   - component: {fileID: 1534421217899736122}
   m_Layer: 0
   m_Name: Player
@@ -83,7 +85,8 @@ MonoBehaviour:
   movement: {fileID: -8221289098585361994}
   health: {fileID: 2490587018747254697}
   singleAttack: {fileID: -4811866425717969270}
-  burstAttack: {fileID: -4811866425717969270}
+  burstAttack: {fileID: 6251089767089595006}
+  inventory: {fileID: 5450233961025937160}
 --- !u!114 &2490587018747254697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +127,37 @@ MonoBehaviour:
   bulletPrefab: {fileID: 7683374911347875814, guid: 182008135dc073a4499247533cb51034, type: 3}
   gunPoint: {fileID: 3435043832360294835}
   damage: 100
+--- !u!114 &6251089767089595006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079371165405672431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f614a2dbca3e9104383292f8fefd3157, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 7683374911347875814, guid: 182008135dc073a4499247533cb51034, type: 3}
+  gunPoint: {fileID: 3435043832360294835}
+  damage: 100
+  delay: 0.15
+--- !u!114 &5450233961025937160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2079371165405672431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed1a02ddbe336534a89bd68d054b4e22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialItems:
+  - Name: Bullet
+    Amount: 10
 --- !u!212 &1534421217899736122
 SpriteRenderer:
   m_ObjectHideFlags: 0

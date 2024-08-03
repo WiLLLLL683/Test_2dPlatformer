@@ -3,13 +3,20 @@ using UnityEngine;
 
 namespace Platformer
 {
-    public class SingleShoot : BulletAttackBase
+    public class DelayShoot : BulletAttackBase
     {
         [SerializeField] private Bullet bulletPrefab;
         [SerializeField] private Transform gunPoint;
         [SerializeField] private int damage;
+        [SerializeField] private float delay;
 
         private InventoryBase inventory;
+        private float shootDelay;
+
+        private void Update()
+        {
+            shootDelay -= Time.deltaTime;
+        }
 
         public override void Init(InventoryBase inventory)
         {
@@ -18,12 +25,14 @@ namespace Platformer
 
         public override void Attack(Vector2 direction)
         {
-            if (inventory.TryGetItem("Bullet", out Item bulletItem) &&
+            if (shootDelay <= 0 &&
+                inventory.TryGetItem("Bullet", out Item bulletItem) &&
                 bulletItem.Amount > 0)
             {
-                Bullet bullet = GameObject.Instantiate(bulletPrefab, gunPoint.position, Quaternion.identity);
+                Bullet bullet = Instantiate(bulletPrefab, gunPoint.position, Quaternion.identity);
                 bullet.Init(direction, damage);
-                bulletItem.Amount--;
+                bulletItem.Amount --;
+                shootDelay = delay;
             }
         }
     }

@@ -8,14 +8,18 @@ namespace Platformer
     {
         [SerializeField] private MovementBase movement;
         [SerializeField] private HealthBase health;
-        [SerializeField] private AttackBase singleAttack;
-        [SerializeField] private AttackBase burstAttack;
+        [SerializeField] private BulletAttackBase singleAttack;
+        [SerializeField] private BulletAttackBase burstAttack;
+        [SerializeField] private InventoryBase inventory;
 
         private Input input;
 
         public void Init(Input input)
         {
             this.input = input;
+            inventory.Init();
+            singleAttack.Init(inventory);
+            burstAttack.Init(inventory);
 
             input.OnMoveInput += movement.Move;
             input.OnShootInput += ShootSingle;
@@ -29,14 +33,7 @@ namespace Platformer
             input.OnShootBurstInput -= ShootBurst;
         }
 
-        private void ShootSingle()
-        {
-            singleAttack.Attack(transform.right);
-        }
-
-        private void ShootBurst()
-        {
-            burstAttack.Attack(transform.right);
-        }
+        private void ShootSingle() => singleAttack.Attack(transform.right);
+        private void ShootBurst() => burstAttack.Attack(transform.right);
     }
 }
