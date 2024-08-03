@@ -11,11 +11,9 @@ namespace Platformer
 
         private ItemData bulletItem;
 
-        public void Init(ItemData bulletItem)
+        public void Init(InventoryBase playerInventory)
         {
-            this.bulletItem = bulletItem;
-
-            if (bulletItem != null)
+            if (playerInventory.TryGetItem("Bullet", out ItemData bulletItem))
             {
                 bulletItem.OnAmountChange += UpdateBulletAmount;
                 UpdateBulletAmount(bulletItem.Amount);

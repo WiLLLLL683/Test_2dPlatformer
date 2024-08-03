@@ -39,9 +39,8 @@ namespace Platformer
             SpawnEnemy();
 
             //Init UI
-            InventoryBase inventory = player.gameObject.GetComponent<InventoryBase>();
-            inventory.TryGetItem("Bullet", out ItemData bulletItem);
-            hudUI.Init(bulletItem);
+            InventoryBase playerInventory = player.gameObject.GetComponent<InventoryBase>();
+            hudUI.Init(playerInventory);
             gameOverUI.Init(sceneManager);
 
             //setup gameover conditions
