@@ -53,8 +53,8 @@ namespace Platformer
             health.OnDeath -= OnDeath;
         }
 
-        private void ShootSingle() => singleAttack.Attack(transform.right);
-        private void ShootBurst() => burstAttack.Attack(transform.right);
+        private void ShootSingle() => singleAttack.Attack(transform.right * transform.localScale.x);
+        private void ShootBurst() => burstAttack.Attack(transform.right * transform.localScale.x);
         private void OnDeath() => Disable();
     }
 }

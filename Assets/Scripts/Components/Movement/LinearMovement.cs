@@ -15,8 +15,22 @@ namespace Platformer
         {
             Vector3 direction = new(inputDirection.x, 0, 0);
             transform.position += Time.deltaTime * speed * direction;
+            FlipDirection(inputDirection);
         }
 
         public override void SetSpeed(float speed) => this.speed = speed;
+
+        private void FlipDirection(Vector2 inputDirection)
+        {
+            inputDirection = inputDirection.normalized;
+            int horizontalDirection = Mathf.CeilToInt(inputDirection.x);
+
+            if (horizontalDirection == 0)
+                return;
+
+            Vector3 scale = transform.localScale;
+            scale.x = Mathf.Abs(scale.x) * horizontalDirection;
+            transform.localScale = scale;
+        }
     }
 }
