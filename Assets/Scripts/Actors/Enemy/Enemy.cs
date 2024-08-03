@@ -18,12 +18,12 @@ namespace Platformer
 
         public void Init()
         {
-            health.OnDie += OnDeath;
+            health.OnDeath += OnDeath;
         }
 
         private void OnDestroy()
         {
-            health.OnDie -= OnDeath;
+            health.OnDeath -= OnDeath;
         }
 
         private void Update()
@@ -34,7 +34,11 @@ namespace Platformer
             }
 
             FindTarget();
-            MoveToTarget();
+
+            if (target != null)
+            {
+                MoveToTarget();
+            }
         }
 
         private void FindTarget()
@@ -42,7 +46,8 @@ namespace Platformer
             Collider2D collision = Physics2D.OverlapCircle(transform.position, targetDetectionRadius, targetLayer);
 
             if (collision != null &&
-                collision.TryGetComponent<Player>(out Player player))
+                collision.TryGetComponent<Player>(out Player player) &&
+                !collision.GetComponent<Health>().IsDead)
             {
                 target = player.transform;
             }

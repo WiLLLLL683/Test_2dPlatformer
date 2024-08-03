@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8146699001757870382}
   - component: {fileID: 4360171234245687884}
   - component: {fileID: 4415450067915287125}
+  - component: {fileID: 8921398944995105762}
   - component: {fileID: 1596015076419459108}
   - component: {fileID: 9097433756584137449}
   - component: {fileID: 5155651219298053807}
@@ -50,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movement: {fileID: 4415450067915287125}
-  attack: {fileID: 0}
+  attack: {fileID: 8921398944995105762}
   health: {fileID: 4360171234245687884}
   rigidbody2d: {fileID: 5155651219298053807}
   targetDetectionRadius: 25
@@ -69,6 +70,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b31fc413bd15f7741a35e82439d29b7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHealth: 100
+  maxHealth: 100
 --- !u!114 &4415450067915287125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,6 +85,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+--- !u!114 &8921398944995105762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5281787210662598100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 257e9c4b1365b304ebbe0231bfc4226c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1000
+  targetLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!212 &1596015076419459108
 SpriteRenderer:
   m_ObjectHideFlags: 0

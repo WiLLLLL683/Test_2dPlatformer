@@ -6,15 +6,20 @@ namespace Platformer
 {
     public class Health : HealthBase, IDamageble
     {
-        public override event Action OnDie;
+        public override bool IsDead { get; protected set; }
+
+        public override event Action OnDeath;
         public override event Action<(int amount, int currentHealth, int maxHealth)> OnDamageTaken;
 
-        private int currentHealth;
-        private int maxHealth;
+        [SerializeField] private int currentHealth;
+        [SerializeField] private int maxHealth;
+
 
         public override void TakeDamage(int amount)
         {
             if (amount <= 0)
+                return;
+            if (IsDead)
                 return;
 
             currentHealth -= amount;
@@ -28,7 +33,9 @@ namespace Platformer
 
         private void Die()
         {
-            OnDie?.Invoke();
+            currentHealth = 0;
+            IsDead = true;
+            OnDeath?.Invoke();
         }
     }
 }

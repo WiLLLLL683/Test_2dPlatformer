@@ -20,20 +20,35 @@ namespace Platformer
             inventory.Init();
             singleAttack.Init(inventory);
             burstAttack.Init(inventory);
-
-            input.OnMoveInput += movement.Move;
-            input.OnShootInput += ShootSingle;
-            input.OnShootBurstInput += ShootBurst;
+            Enable();
         }
 
         private void OnDestroy()
         {
+            Disable();
+        }
+
+        public void Enable()
+        {
+            input.OnMoveInput += movement.Move;
+            input.OnShootInput += ShootSingle;
+            input.OnShootBurstInput += ShootBurst;
+            health.OnDeath += OnDeath;
+        }
+
+        public void Disable()
+        {
             input.OnMoveInput -= movement.Move;
             input.OnShootInput -= ShootSingle;
             input.OnShootBurstInput -= ShootBurst;
+            health.OnDeath -= OnDeath;
         }
 
         private void ShootSingle() => singleAttack.Attack(transform.right);
         private void ShootBurst() => burstAttack.Attack(transform.right);
+        private void OnDeath()
+        {
+            Disable();
+        }
     }
 }
