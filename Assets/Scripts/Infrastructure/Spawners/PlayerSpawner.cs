@@ -5,23 +5,26 @@ using UnityEngine;
 
 namespace Platformer
 {
-    public class PlayerSpawner : MonoBehaviour
+    public class PlayerSpawner
     {
-        [SerializeField] private Player prefab;
+        private readonly Player prefab;
+        private readonly Transform spawnPoint;
+        private readonly Input input;
+        private readonly BulletSpawner bulletSpawner;
 
         private List<Player> players = new();
-        private Input input;
-        private BulletSpawner bulletSpawner;
 
-        public void Init(Input input, BulletSpawner bulletSpawner)
+        public PlayerSpawner(Player prefab, Transform spawnPoint, Input input, BulletSpawner bulletSpawner)
         {
+            this.prefab = prefab;
+            this.spawnPoint = spawnPoint;
             this.input = input;
             this.bulletSpawner = bulletSpawner;
         }
 
         public Player Spawn()
         {
-            Player player = Instantiate(prefab, transform.position, Quaternion.identity);
+            Player player = GameObject.Instantiate(prefab, spawnPoint.position, Quaternion.identity);
             player.Init(input, bulletSpawner);
             players.Add(player);
             return player;
@@ -31,7 +34,7 @@ namespace Platformer
         {
             for (int i = 0; i < players.Count; i++)
             {
-                Destroy(players[i].gameObject);
+                GameObject.Destroy(players[i].gameObject);
             }
         }
     }

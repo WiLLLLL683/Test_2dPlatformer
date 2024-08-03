@@ -8,17 +8,20 @@ namespace Platformer
     public class Bootstrap : MonoBehaviour
     {
         [Header("Spawners")]
-        [SerializeField] private PlayerSpawner playerSpawner;
-        [SerializeField] private EnemySpawner[] enemySpawners;
+        [SerializeField] private Transform playerSpawnPoint;
+        [SerializeField] private List<Transform> enemySpawnPoints;
         [Header("UI")]
         [SerializeField] private HudUI hudUI;
         [SerializeField] private GameOverUI gameOverUI;
         [Header("Config")]
         [SerializeField] private ItemSetConfig allItemsConfig;
         [SerializeField] private GameplayConfig gameplayConfig;
+        [SerializeField] private SpawnConfig spawnConfig;
 
         private StateMachine stateMachine = new();
         private Input input;
+        private PlayerSpawner playerSpawner;
+        private EnemySpawner enemySpawner;
         private ItemSpawner itemSpawner;
         private BulletSpawner bulletSpawner;
         private SceneManager sceneManager;
@@ -29,14 +32,11 @@ namespace Platformer
             input = new();
             itemSpawner = new(allItemsConfig);
             bulletSpawner = new();
+            playerSpawner = new(spawnConfig.playerPrefab, playerSpawnPoint, input, bulletSpawner);
+            enemySpawner = new(spawnConfig, enemySpawnPoints, itemSpawner);
             sceneManager = new();
-            playerSpawner.Init(input, bulletSpawner);
-            for (int i = 0; i < enemySpawners.Length; i++)
-            {
-                enemySpawners[i].Init(itemSpawner);
-            }
 
-            stateMachine.AddState(new GameplayState(stateMachine, input, sceneManager, playerSpawner, enemySpawners, hudUI, gameOverUI, gameplayConfig));
+            stateMachine.AddState(new GameplayState(stateMachine, input, sceneManager, playerSpawner, enemySpawner, hudUI, gameOverUI, gameplayConfig));
             stateMachine.AddState(new GameOverState(input, gameOverUI));
 
             stateMachine.EnterState<GameplayState>();

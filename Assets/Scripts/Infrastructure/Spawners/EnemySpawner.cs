@@ -4,24 +4,41 @@ using UnityEngine;
 
 namespace Platformer
 {
-    public class EnemySpawner : MonoBehaviour
+    public class EnemySpawner
     {
-        [SerializeField] private Enemy prefab;
-        [SerializeField] private float minMoveSpeed;
-        [SerializeField] private float maxMoveSpeed;
-
+        private SpawnConfig config;
+        private List<Transform> spawnPoints;
         private List<Enemy> enemies = new();
         private ItemSpawner itemSpawner;
 
-        public void Init(ItemSpawner itemSpawner)
+        public EnemySpawner(SpawnConfig config, List<Transform> spawnPoints, ItemSpawner itemSpawner)
         {
+            this.config = config;
+            this.spawnPoints = spawnPoints;
             this.itemSpawner = itemSpawner;
+        }
+
+        public void SpawnMultiple(int amount)
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                Spawn();
+            }
         }
 
         public Enemy Spawn()
         {
-            Enemy enemy = Instantiate(prefab, transform.position, Quaternion.identity);
-            float moveSpeed = UnityEngine.Random.Range(minMoveSpeed, maxMoveSpeed);
+            //random spawn point
+            int random = UnityEngine.Random.Range(0, spawnPoints.Count);
+            Vector2 position = spawnPoints[random].position;
+
+            //random prefab
+            int randomPrefabIndex = UnityEngine.Random.Range(0, config.enemyPrefabs.Length);
+            Enemy randomPrefab = config.enemyPrefabs[randomPrefabIndex];
+
+            //spawn
+            Enemy enemy = GameObject.Instantiate(randomPrefab, position, Quaternion.identity);
+            float moveSpeed = UnityEngine.Random.Range(config.minMoveSpeed, config.maxMoveSpeed);
             enemy.Init(moveSpeed, itemSpawner);
             enemies.Add(enemy);
             return enemy;
@@ -31,7 +48,7 @@ namespace Platformer
         {
             for (int i = 0; i < enemies.Count; i++)
             {
-                Destroy(enemies[i].gameObject);
+                GameObject.Destroy(enemies[i].gameObject);
             }
         }
     }
