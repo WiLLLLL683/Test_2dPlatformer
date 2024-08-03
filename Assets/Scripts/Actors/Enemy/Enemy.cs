@@ -12,11 +12,8 @@ namespace Platformer
         [SerializeField] private AttackBase attack;
         [SerializeField] private HealthBase health;
         [SerializeField] private ItemDropBase itemDrop;
-        [Header("TargetDetection")]
-        [SerializeField] private float targetDetectionRadius;
-        [SerializeField] private LayerMask targetLayer;
+        [SerializeField] private TargetDetectionBase targetDetection;
 
-        private Transform target;
         private bool isEnabled;
 
         public void Init(float moveSpeed, ItemSpawner itemSpawner)
@@ -36,9 +33,9 @@ namespace Platformer
             if (!isEnabled)
                 return;
 
-            FindTarget();
+            targetDetection.FindTarget();
 
-            if (target != null)
+            if (targetDetection.Target != null)
             {
                 MoveToTarget();
             }
@@ -62,28 +59,9 @@ namespace Platformer
             health.OnDeath -= OnDeath;
         }
 
-        private void FindTarget()
-        {
-            Collider2D collision = Physics2D.OverlapCircle(transform.position, targetDetectionRadius, targetLayer);
-
-            if (collision != null &&
-                collision.TryGetComponent<Player>(out Player player) &&
-                !collision.GetComponent<Health>().IsDead)
-            {
-                target = player.transform;
-            }
-            else
-            {
-                target = null;
-            }
-        }
-
         private void MoveToTarget()
         {
-            if (target == null)
-                return;
-
-            Vector2 direction = target.position - transform.position;
+            Vector2 direction = targetDetection.Target.position - transform.position;
             direction = direction.normalized;
             movement.Move(direction);
         }
