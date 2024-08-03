@@ -10,10 +10,17 @@ namespace Platformer
         [SerializeField] private Player prefab;
 
         private List<Player> players = new();
+        private Input input;
+
+        public void Init(Input input)
+        {
+            this.input = input;
+        }
 
         public void Spawn()
         {
             Player player = Instantiate(prefab, transform.position, Quaternion.identity);
+            player.Init(input);
             players.Add(player);
         }
 

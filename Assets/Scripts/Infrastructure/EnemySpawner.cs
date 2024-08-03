@@ -10,6 +10,10 @@ namespace Platformer
 
         private List<Enemy> enemies = new();
 
+        public void Init()
+        {
+            // TODO: Add your implementation
+        }
         public void Spawn()
         {
             Enemy enemy = Instantiate(prefab, transform.position, Quaternion.identity);

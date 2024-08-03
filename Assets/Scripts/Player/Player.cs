@@ -6,16 +6,36 @@ namespace Platformer
 {
     public class Player : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        [SerializeField] private float speed;
 
+        private Input input;
+
+        public void Init(Input input)
+        {
+            this.input = input;
+            input.OnMoveInput += Move;
+            input.OnShootInput += ShootSingle;
+            input.OnShootBurstInput += ShootBurst;
+        }
+        private void OnDestroy()
+        {
+            input.OnMoveInput -= Move;
+            input.OnShootInput -= ShootSingle;
+            input.OnShootBurstInput -= ShootBurst;
         }
 
-        // Update is called once per frame
-        void Update()
+        private void Move(Vector2 inputDirection)
         {
-
+            Vector3 direction = new(inputDirection.x, 0, 0);
+            transform.position += Time.deltaTime * speed * direction;
+        }
+        private void ShootSingle()
+        {
+            Debug.Log("Single Shoot");
+        }
+        private void ShootBurst()
+        {
+            Debug.Log("Burst Shoot");
         }
     }
 }

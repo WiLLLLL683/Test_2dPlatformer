@@ -11,14 +11,22 @@ namespace Platformer
         [SerializeField] private EnemySpawner[] enemySpawners;
 
         private StateMachine stateMachine = new();
+        private Input input;
 
         private void Awake()
         {
-            stateMachine.AddState(new InitState(stateMachine));
-            stateMachine.AddState(new GameplayState(playerSpawner, enemySpawners));
+            input = new Input();
+
+            stateMachine.AddState(new InitState(stateMachine, input, playerSpawner, enemySpawners));
+            stateMachine.AddState(new GameplayState(input, playerSpawner, enemySpawners));
             stateMachine.AddState(new GameOverState());
 
             stateMachine.EnterState<InitState>();
+        }
+
+        private void Update()
+        {
+            input.Update();
         }
     }
 }
