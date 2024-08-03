@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using Utils;
 
 namespace Platformer
@@ -9,6 +10,10 @@ namespace Platformer
         private readonly PlayerSpawner playerSpawner;
         private readonly EnemySpawner[] enemySpawners;
         private readonly HudUI hudUI;
+
+        private const float ENEMY_SPAWN_DELAY = 10f;
+
+        private float enemySpawnTimer;
 
         public GameplayState(Input input, PlayerSpawner playerSpawner, EnemySpawner[] enemySpawners, HudUI hudUI)
         {
@@ -24,10 +29,7 @@ namespace Platformer
 
             //spawn actors
             Player player = playerSpawner.Spawn();
-            for (int i = 0; i < enemySpawners.Length; i++)
-            {
-                enemySpawners[i].Spawn();
-            }
+            SpawnEnemy();
 
             //Init UI
             InventoryBase inventory = player.gameObject.GetComponent<InventoryBase>();
@@ -36,13 +38,26 @@ namespace Platformer
 
         }
 
+        private void SpawnEnemy()
+        {
+            int random = UnityEngine.Random.Range(0, enemySpawners.Length);
+            enemySpawners[random].Spawn();
+            enemySpawnTimer = ENEMY_SPAWN_DELAY;
+        }
+
         public void OnExit()
         {
+
         }
 
         public void OnUpdate()
         {
+            enemySpawnTimer -= Time.deltaTime;
 
+            if (enemySpawnTimer <= 0)
+            {
+                SpawnEnemy();
+            }
         }
     }
 }
