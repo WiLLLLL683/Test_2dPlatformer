@@ -9,6 +9,7 @@ namespace Platformer
     {
         [SerializeField] private PlayerSpawner playerSpawner;
         [SerializeField] private EnemySpawner[] enemySpawners;
+        [SerializeField] private HudUI hudUI;
 
         private StateMachine stateMachine = new();
         private Input input;
@@ -18,7 +19,7 @@ namespace Platformer
             input = new Input();
 
             stateMachine.AddState(new InitState(stateMachine, input, playerSpawner, enemySpawners));
-            stateMachine.AddState(new GameplayState(input, playerSpawner, enemySpawners));
+            stateMachine.AddState(new GameplayState(input, playerSpawner, enemySpawners, hudUI));
             stateMachine.AddState(new GameOverState());
 
             stateMachine.EnterState<InitState>();

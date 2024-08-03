@@ -17,11 +17,12 @@ namespace Platformer
             this.input = input;
         }
 
-        public void Spawn()
+        public Player Spawn()
         {
             Player player = Instantiate(prefab, transform.position, Quaternion.identity);
             player.Init(input);
             players.Add(player);
+            return player;
         }
 
         public void Clear()

@@ -157,7 +157,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialItems:
   - Name: Bullet
-    Amount: 10
+    amount: 10
 --- !u!212 &1534421217899736122
 SpriteRenderer:
   m_ObjectHideFlags: 0

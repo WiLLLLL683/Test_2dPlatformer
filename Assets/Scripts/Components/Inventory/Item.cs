@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Platformer
 {
@@ -6,6 +7,18 @@ namespace Platformer
     public class Item
     {
         public string Name;
-        public int Amount;
+        public int Amount
+        {
+            get { return amount; }
+            set
+            {
+                amount = value;
+                OnAmountChange?.Invoke(amount);
+            }
+        }
+
+        [SerializeField] private int amount;
+
+        [field: NonSerialized] public event Action<int> OnAmountChange;
     }
 }

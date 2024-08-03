@@ -14,10 +14,11 @@ namespace Platformer
         {
             // TODO: Add your implementation
         }
-        public void Spawn()
+        public Enemy Spawn()
         {
             Enemy enemy = Instantiate(prefab, transform.position, Quaternion.identity);
             enemies.Add(enemy);
+            return enemy;
         }
 
         public void Clear()
