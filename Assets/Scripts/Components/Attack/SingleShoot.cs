@@ -10,10 +10,12 @@ namespace Platformer
         [SerializeField] private int damage;
 
         private InventoryBase inventory;
+        private BulletSpawner bulletSpawner;
 
-        public override void Init(InventoryBase inventory)
+        public override void Init(InventoryBase inventory, BulletSpawner bulletSpawner)
         {
             this.inventory = inventory;
+            this.bulletSpawner = bulletSpawner;
         }
 
         public override void Attack(Vector2 direction)
@@ -21,8 +23,7 @@ namespace Platformer
             if (inventory.TryGetItem("Bullet", out ItemData bulletItem) &&
                 bulletItem.Amount > 0)
             {
-                Bullet bullet = GameObject.Instantiate(bulletPrefab, gunPoint.position, Quaternion.identity);
-                bullet.Init(direction, damage);
+                bulletSpawner.Spawn(bulletPrefab, damage, gunPoint.position, direction);
                 bulletItem.Amount--;
             }
         }

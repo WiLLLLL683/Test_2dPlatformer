@@ -20,19 +20,26 @@ namespace Platformer
         private StateMachine stateMachine = new();
         private Input input;
         private ItemSpawner itemSpawner;
+        private BulletSpawner bulletSpawner;
         private SceneManager sceneManager;
 
         private void Awake()
         {
+            //Initialization
             input = new();
             itemSpawner = new(allItemsConfig);
+            bulletSpawner = new();
             sceneManager = new();
+            playerSpawner.Init(input, bulletSpawner);
+            for (int i = 0; i < enemySpawners.Length; i++)
+            {
+                enemySpawners[i].Init(itemSpawner);
+            }
 
-            stateMachine.AddState(new InitState(stateMachine, input, playerSpawner, enemySpawners, itemSpawner));
             stateMachine.AddState(new GameplayState(stateMachine, input, sceneManager, playerSpawner, enemySpawners, hudUI, gameOverUI, gameplayConfig));
             stateMachine.AddState(new GameOverState(input, gameOverUI));
 
-            stateMachine.EnterState<InitState>();
+            stateMachine.EnterState<GameplayState>();
         }
 
         private void Update()

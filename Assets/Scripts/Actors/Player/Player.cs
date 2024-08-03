@@ -16,12 +16,12 @@ namespace Platformer
         private Input input;
         private bool isEnabled;
 
-        public void Init(Input input)
+        public void Init(Input input, BulletSpawner bulletSpawner)
         {
             this.input = input;
             inventory.Init();
-            singleAttack.Init(inventory);
-            burstAttack.Init(inventory);
+            singleAttack.Init(inventory, bulletSpawner);
+            burstAttack.Init(inventory, bulletSpawner);
             Enable();
         }
 

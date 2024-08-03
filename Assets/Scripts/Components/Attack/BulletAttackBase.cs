@@ -2,6 +2,6 @@
 {
     public abstract class BulletAttackBase : AttackBase
     {
-        public abstract void Init(InventoryBase inventory);
+        public abstract void Init(InventoryBase inventory, BulletSpawner bulletSpawner);
     }
 }

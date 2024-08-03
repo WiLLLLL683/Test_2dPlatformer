@@ -11,16 +11,18 @@ namespace Platformer
 
         private List<Player> players = new();
         private Input input;
+        private BulletSpawner bulletSpawner;
 
-        public void Init(Input input)
+        public void Init(Input input, BulletSpawner bulletSpawner)
         {
             this.input = input;
+            this.bulletSpawner = bulletSpawner;
         }
 
         public Player Spawn()
         {
             Player player = Instantiate(prefab, transform.position, Quaternion.identity);
-            player.Init(input);
+            player.Init(input, bulletSpawner);
             players.Add(player);
             return player;
         }

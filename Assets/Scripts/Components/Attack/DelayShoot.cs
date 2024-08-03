@@ -11,28 +11,29 @@ namespace Platformer
         [SerializeField] private float delay;
 
         private InventoryBase inventory;
-        private float shootDelay;
+        private BulletSpawner bulletSpawner;
+        private float shootTimer;
+
+        public override void Init(InventoryBase inventory, BulletSpawner bulletSpawner)
+        {
+            this.inventory = inventory;
+            this.bulletSpawner = bulletSpawner;
+        }
 
         private void Update()
         {
-            shootDelay -= Time.deltaTime;
-        }
-
-        public override void Init(InventoryBase inventory)
-        {
-            this.inventory = inventory;
+            shootTimer -= Time.deltaTime;
         }
 
         public override void Attack(Vector2 direction)
         {
-            if (shootDelay <= 0 &&
+            if (shootTimer <= 0 &&
                 inventory.TryGetItem("Bullet", out ItemData bulletItem) &&
                 bulletItem.Amount > 0)
             {
-                Bullet bullet = Instantiate(bulletPrefab, gunPoint.position, Quaternion.identity);
-                bullet.Init(direction, damage);
+                bulletSpawner.Spawn(bulletPrefab, damage, gunPoint.position, direction);
                 bulletItem.Amount --;
-                shootDelay = delay;
+                shootTimer = delay;
             }
         }
     }
