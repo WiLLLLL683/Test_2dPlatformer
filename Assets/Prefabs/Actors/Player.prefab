@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3435043832360294835}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GunPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 1534421217899736122}
   - component: {fileID: 5191863332469624293}
   - component: {fileID: 6735652038439793821}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ca2cc64b314bb45b23c28abed081da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 8
 --- !u!114 &-4811866425717969270
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -18,6 +18,7 @@ namespace Platformer
         {
             Enemy enemy = Instantiate(prefab, transform.position, Quaternion.identity);
             enemies.Add(enemy);
+            enemy.Init();
             return enemy;
         }
 

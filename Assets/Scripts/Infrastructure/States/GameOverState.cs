@@ -14,5 +14,10 @@ namespace Platformer
         {
 
         }
+
+        public void OnUpdate()
+        {
+
+        }
     }
 }

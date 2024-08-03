@@ -48,6 +48,8 @@ namespace Utils
             return (T)states[typeof(T)];
         }
 
+        public void Update() => CurrentState.OnUpdate();
+
         private void ChangeState(IExitableState newState)
         {
             if (CurrentState != null)

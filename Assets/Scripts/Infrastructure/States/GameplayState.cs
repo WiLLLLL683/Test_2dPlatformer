@@ -39,5 +39,10 @@ namespace Platformer
         public void OnExit()
         {
         }
+
+        public void OnUpdate()
+        {
+
+        }
     }
 }

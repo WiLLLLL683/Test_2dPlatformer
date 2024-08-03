@@ -28,6 +28,7 @@ namespace Platformer
         private void Update()
         {
             input.Update();
+            stateMachine.Update();
         }
     }
 }
