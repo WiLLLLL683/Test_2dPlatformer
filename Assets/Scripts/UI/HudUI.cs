@@ -8,13 +8,15 @@ namespace Platformer
     public class HudUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text bulletAmountText;
+        [SerializeField] private string bulletItemId;
 
         private ItemData bulletItem;
 
         public void Init(InventoryBase playerInventory)
         {
-            if (playerInventory.TryGetItem("Bullet", out ItemData bulletItem))
+            if (playerInventory.TryGetItem(bulletItemId, out ItemData bulletItem))
             {
+                this.bulletItem = bulletItem;
                 bulletItem.OnAmountChange += UpdateBulletAmount;
                 UpdateBulletAmount(bulletItem.Amount);
             }

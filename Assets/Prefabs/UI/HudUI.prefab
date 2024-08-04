@@ -188,6 +188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletAmountText: {fileID: 5386030668398706439}
+  bulletItemId: Bullet
 --- !u!223 &7562028122201817805
 Canvas:
   m_ObjectHideFlags: 0

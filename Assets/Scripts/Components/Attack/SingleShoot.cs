@@ -22,7 +22,7 @@ namespace Platformer
 
         public override void Attack(Vector2 direction)
         {
-            if (inventory.TryGetItem("Bullet", out ItemData bulletItem) &&
+            if (inventory.TryGetItem(consumeItemId, out ItemData bulletItem) &&
                 bulletItem.Amount > 0)
             {
                 bulletSpawner.Spawn(bulletPrefab, damage, gunPoint.position, direction);

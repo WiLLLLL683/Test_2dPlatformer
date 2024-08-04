@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2daca0c0154ba4dbdef4fe943e99b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumeItemId: Bullet
   bulletPrefab: {fileID: 7683374911347875814, guid: 182008135dc073a4499247533cb51034, type: 3}
   gunPoint: {fileID: 1255543183775916943}
   damage: 100
@@ -115,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f614a2dbca3e9104383292f8fefd3157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  consumeItemId: Bullet
   bulletPrefab: {fileID: 7683374911347875814, guid: 182008135dc073a4499247533cb51034, type: 3}
   gunPoint: {fileID: 1255543183775916943}
   damage: 100
