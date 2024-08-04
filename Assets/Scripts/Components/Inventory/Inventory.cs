@@ -11,6 +11,8 @@ namespace Platformer
 
         private Dictionary<string, ItemData> items = new();
 
+        public override event Action OnItemPickUp;
+
         public override void Init()
         {
             for (int i = 0; i < initialItems.Count; i++)
@@ -29,6 +31,7 @@ namespace Platformer
             {
                 items.Add(item.Id, item);
             }
+            OnItemPickUp?.Invoke();
         }
 
         public override bool TryGetItem(string id, out ItemData item)

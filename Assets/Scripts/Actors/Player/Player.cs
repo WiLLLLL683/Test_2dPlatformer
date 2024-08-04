@@ -31,7 +31,7 @@ namespace Platformer
             burstAttack.Init(inventory, bulletSpawner);
             var attacks = new BulletAttackBase[2] { singleAttack, burstAttack };
             visuals.Init(this, attacks);
-            playerAudio.Init(this, attacks);
+            playerAudio.Init(this, attacks, inventory);
             Enable();
         }
 

@@ -10,14 +10,17 @@ namespace Platformer
         [SerializeField] private AudioSource moveSourse;
         [SerializeField] private AudioSource shootSourse;
         [SerializeField] private AudioSource dieSourse;
+        [SerializeField] private AudioSource pickUpSourse;
 
         private Player player;
         private BulletAttackBase[] attacks;
+        private InventoryBase inventory;
 
-        public void Init(Player player, BulletAttackBase[] attacks)
+        public void Init(Player player, BulletAttackBase[] attacks, InventoryBase inventory)
         {
             this.player = player;
             this.attacks = attacks;
+            this.inventory = inventory;
 
             transform.position = Camera.main.transform.position;
             transform.parent = Camera.main.transform;
@@ -31,6 +34,7 @@ namespace Platformer
             {
                 attacks[i].OnShoot += PlayShootSound;
             }
+            inventory.OnItemPickUp += PlayPickUpSound;
         }
 
         public void Disable()
@@ -44,6 +48,7 @@ namespace Platformer
             {
                 attacks[i].OnShoot -= PlayShootSound;
             }
+            inventory.OnItemPickUp -= PlayPickUpSound;
         }
 
         private void PlayMoveSound(bool isMoving)
@@ -58,14 +63,8 @@ namespace Platformer
             }
         }
 
-        private void PlayDeathSound()
-        {
-            dieSourse.PlayOneShot(dieSourse.clip);
-        }
-
-        private void PlayShootSound()
-        {
-            shootSourse.PlayOneShot(shootSourse.clip);
-        }
+        private void PlayDeathSound() => dieSourse.PlayOneShot(dieSourse.clip);
+        private void PlayShootSound() => shootSourse.PlayOneShot(shootSourse.clip);
+        private void PlayPickUpSound() => pickUpSourse.PlayOneShot(pickUpSourse.clip);
     }
 }
