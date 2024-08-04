@@ -37,7 +37,12 @@ namespace Platformer
 
         private void OnDestroy()
         {
-            Destroy(playerAudio, AUDIO_DESTROY_DELAY);
+            if (playerAudio != null)
+            {
+                playerAudio.Disable();
+                Destroy(playerAudio, AUDIO_DESTROY_DELAY);
+            }
+
             Disable();
         }
 

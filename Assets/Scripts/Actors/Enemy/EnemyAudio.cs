@@ -28,12 +28,21 @@ namespace Platformer
 
         public void Disable()
         {
-            idleSourse.Stop();
-            moveSourse.Stop();
+            if (idleSourse != null)
+            {
+                idleSourse.Stop();
+            }
+            if (moveSourse != null)
+            {
+                moveSourse.Stop();
+            }
 
-            enemy.OnMove -= PlayMoveSound;
-            enemy.OnDeath -= PlayDeathSound;
-        } 
+            if (enemy != null)
+            {
+                enemy.OnMove -= PlayMoveSound;
+                enemy.OnDeath -= PlayDeathSound;
+            }
+        }
 
         private void PlayMoveSound(bool isMoving)
         {

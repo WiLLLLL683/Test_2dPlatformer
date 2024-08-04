@@ -34,9 +34,13 @@ namespace Platformer
 
         private void OnDestroy()
         {
+            if (enemyAudio != null)
+            {
+                enemyAudio.Disable();
+                Destroy(enemyAudio.gameObject, AUDIO_DESTROY_DELAY);
+            }
+
             Disable();
-            enemyAudio.Disable();
-            Destroy(enemyAudio.gameObject, AUDIO_DESTROY_DELAY);
         }
 
         private void Update()

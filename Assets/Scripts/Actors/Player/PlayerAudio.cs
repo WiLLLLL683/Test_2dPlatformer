@@ -39,16 +39,25 @@ namespace Platformer
 
         public void Disable()
         {
-            idleSourse.Stop();
-            moveSourse.Stop();
-
-            player.OnMove -= PlayMoveSound;
-            player.OnDeath -= PlayDeathSound;
-            for (int i = 0; i < attacks.Length; i++)
+            if (idleSourse != null)
             {
-                attacks[i].OnShoot -= PlayShootSound;
+                idleSourse?.Stop();
             }
-            inventory.OnItemPickUp -= PlayPickUpSound;
+            if (moveSourse != null)
+            {
+                moveSourse?.Stop();
+            }
+
+            if (player != null)
+            {
+                player.OnMove -= PlayMoveSound;
+                player.OnDeath -= PlayDeathSound;
+                for (int i = 0; i < attacks.Length; i++)
+                {
+                    attacks[i].OnShoot -= PlayShootSound;
+                }
+                inventory.OnItemPickUp -= PlayPickUpSound;
+            }
         }
 
         private void PlayMoveSound(bool isMoving)
