@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,6 +13,9 @@ namespace Platformer
         [SerializeField] private BulletAttackBase singleAttack;
         [SerializeField] private BulletAttackBase burstAttack;
         [SerializeField] private InventoryBase inventory;
+        [SerializeField] private PlayerVisuals visuals;
+
+        public event Action<bool> OnMove;
 
         private Input input;
         private bool isEnabled;
@@ -22,6 +26,7 @@ namespace Platformer
             inventory.Init();
             singleAttack.Init(inventory, bulletSpawner);
             burstAttack.Init(inventory, bulletSpawner);
+            visuals.Init(this);
             Enable();
         }
 
@@ -36,7 +41,8 @@ namespace Platformer
                 return;
 
             isEnabled = true;
-            input.OnMoveInput += movement.Move;
+            input.OnMoveInput += Move;
+            input.OnNoMoveInput += NoMove;
             input.OnShootInput += ShootSingle;
             input.OnShootBurstInput += ShootBurst;
             health.OnDeath += OnDeath;
@@ -48,12 +54,22 @@ namespace Platformer
                 return;
 
             isEnabled = false;
-            input.OnMoveInput -= movement.Move;
+            input.OnMoveInput -= Move;
+            input.OnNoMoveInput -= NoMove;
             input.OnShootInput -= ShootSingle;
             input.OnShootBurstInput -= ShootBurst;
             health.OnDeath -= OnDeath;
         }
 
+        private void Move(Vector2 direction)
+        {
+            movement.Move(direction);
+            OnMove?.Invoke(true);
+        }
+        private void NoMove()
+        {
+            OnMove?.Invoke(false);
+        }
         private void ShootSingle() => singleAttack.Attack(transform.right * transform.localScale.x);
         private void ShootBurst() => burstAttack.Attack(transform.right * transform.localScale.x);
         private void OnDeath() => Disable();

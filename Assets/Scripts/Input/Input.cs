@@ -10,6 +10,7 @@ namespace Platformer
         public event Action OnShootInput;
         public event Action OnShootBurstInput;
         public event Action<Vector2> OnMoveInput;
+        public event Action OnNoMoveInput;
 
         private readonly GameplayConfig config;
         private readonly GameControls controls;
@@ -41,6 +42,10 @@ namespace Platformer
             if (controls.Gameplay.Movement.IsPressed())
             {
                 MoveInput();
+            }
+            else
+            {
+                OnNoMoveInput?.Invoke();
             }
 
             shootPressedTimer -= Time.deltaTime;
