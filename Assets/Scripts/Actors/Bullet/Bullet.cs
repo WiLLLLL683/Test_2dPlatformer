@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Pool;
 
 namespace Platformer
 {
@@ -11,11 +12,13 @@ namespace Platformer
 
         private Vector2 direction;
         private int damage;
+        private ObjectPool<Bullet> pool;
 
-        public void Init(Vector2 direction, int damage)
+        public void Init(Vector2 direction, int damage, ObjectPool<Bullet> pool)
         {
             this.direction = direction;
             this.damage = damage;
+            this.pool = pool;
         }
 
         private void Update()
@@ -30,12 +33,12 @@ namespace Platformer
                 damageble.TakeDamage(damage);
             }
 
-            Destroy(gameObject);
+            pool.Release(this);
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            Destroy(gameObject);
+            pool.Release(this);
         }
     }
 }
