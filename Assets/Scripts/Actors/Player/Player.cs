@@ -14,10 +14,12 @@ namespace Platformer
         [SerializeField] private BulletAttackBase burstAttack;
         [SerializeField] private InventoryBase inventory;
         [SerializeField] private PlayerVisuals visuals;
+        [SerializeField] private PlayerAudio playerAudio;
 
         public event Action<bool> OnMove;
-        public event Action OnShoot;
+        public event Action OnDeath;
 
+        private const float AUDIO_DESTROY_DELAY = 5f;
         private Input input;
         private bool isEnabled;
 
@@ -27,12 +29,15 @@ namespace Platformer
             inventory.Init();
             singleAttack.Init(inventory, bulletSpawner);
             burstAttack.Init(inventory, bulletSpawner);
-            visuals.Init(this);
+            var attacks = new BulletAttackBase[2] { singleAttack, burstAttack };
+            visuals.Init(this, attacks);
+            playerAudio.Init(this, attacks);
             Enable();
         }
 
         private void OnDestroy()
         {
+            Destroy(playerAudio, AUDIO_DESTROY_DELAY);
             Disable();
         }
 
@@ -46,7 +51,7 @@ namespace Platformer
             input.OnNoMoveInput += NoMove;
             input.OnShootInput += ShootSingle;
             input.OnShootBurstInput += ShootBurst;
-            health.OnDeath += OnDeath;
+            health.OnDeath += Die;
         }
 
         public void Disable()
@@ -59,7 +64,7 @@ namespace Platformer
             input.OnNoMoveInput -= NoMove;
             input.OnShootInput -= ShootSingle;
             input.OnShootBurstInput -= ShootBurst;
-            health.OnDeath -= OnDeath;
+            health.OnDeath -= Die;
         }
 
         private void Move(Vector2 direction)
@@ -74,13 +79,15 @@ namespace Platformer
         private void ShootSingle()
         {
             singleAttack.Attack(transform.right * transform.localScale.x);
-            OnShoot?.Invoke();
         }
         private void ShootBurst()
         {
             burstAttack.Attack(transform.right * transform.localScale.x);
-            OnShoot?.Invoke();
         }
-        private void OnDeath() => Disable();
+        private void Die()
+        {
+            OnDeath?.Invoke();
+            Disable();
+        }
     }
 }

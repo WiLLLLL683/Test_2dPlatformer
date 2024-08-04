@@ -23,12 +23,12 @@ namespace Platformer
         private const float AUDIO_DESTROY_DELAY = 5f;
         private bool isEnabled;
 
-        public void Init(float moveSpeed, ItemSpawner itemSpawner, AudioPlayer audioPlayer)
+        public void Init(float moveSpeed, ItemSpawner itemSpawner)
         {
             itemDrop.Init(itemSpawner);
             movement.Init(moveSpeed);
             visuals.Init(this);
-            enemyAudio.Init(this, audioPlayer);
+            enemyAudio.Init(this);
             Enable();
         }
 

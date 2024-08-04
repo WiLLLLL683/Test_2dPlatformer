@@ -7,7 +7,6 @@ namespace Platformer
 {
     public class Bootstrap : MonoBehaviour
     {
-        [SerializeField] private AudioPlayer audioPlayer;
         [Header("Spawners")]
         [SerializeField] private Transform playerSpawnPoint;
         [SerializeField] private List<Transform> enemySpawnPoints;
@@ -34,7 +33,7 @@ namespace Platformer
             itemSpawner = new(allItemsConfig);
             bulletSpawner = new();
             playerSpawner = new(spawnConfig.playerPrefab, playerSpawnPoint, input, bulletSpawner);
-            enemySpawner = new(spawnConfig, enemySpawnPoints, itemSpawner, audioPlayer);
+            enemySpawner = new(spawnConfig, enemySpawnPoints, itemSpawner);
             sceneManager = new();
 
             stateMachine.AddState(new GameplayState(stateMachine, input, sceneManager, playerSpawner, enemySpawner, hudUI, gameOverUI, gameplayConfig));

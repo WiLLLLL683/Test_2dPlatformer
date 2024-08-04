@@ -11,12 +11,10 @@ namespace Platformer
         [SerializeField] private AudioSource dieSourse;
 
         private Enemy enemy;
-        private AudioPlayer audioPlayer;
 
-        public void Init(Enemy enemy, AudioPlayer audioPlayer)
+        public void Init(Enemy enemy)
         {
             this.enemy = enemy;
-            this.audioPlayer = audioPlayer;
 
             transform.position = Camera.main.transform.position;
             transform.parent = Camera.main.transform;

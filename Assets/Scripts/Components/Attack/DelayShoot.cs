@@ -14,6 +14,8 @@ namespace Platformer
         private BulletSpawner bulletSpawner;
         private float shootTimer;
 
+        public override event Action OnShoot;
+
         public override void Init(InventoryBase inventory, BulletSpawner bulletSpawner)
         {
             this.inventory = inventory;
@@ -34,6 +36,7 @@ namespace Platformer
                 bulletSpawner.Spawn(bulletPrefab, damage, gunPoint.position, direction);
                 bulletItem.Amount --;
                 shootTimer = delay;
+                OnShoot?.Invoke();
             }
         }
     }
