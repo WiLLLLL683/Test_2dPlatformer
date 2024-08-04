@@ -4,22 +4,22 @@ using UnityEngine;
 
 namespace Platformer
 {
-    public class PlayerVisuals : MonoBehaviour
+    public class EnemyVisuals : MonoBehaviour
     {
         [SerializeField] private Animator animator;
 
-        private Player player;
+        private Enemy enemy;
 
-        public void Init(Player player)
+        public void Init(Enemy enemy)
         {
-            this.player = player;
+            this.enemy = enemy;
 
-            player.OnMove += AnimateMove;
+            enemy.OnMove += AnimateMove;
         }
 
         private void OnDestroy()
         {
-            player.OnMove -= AnimateMove;
+            enemy.OnMove -= AnimateMove;
         }
 
         private void AnimateMove(bool isMoving)

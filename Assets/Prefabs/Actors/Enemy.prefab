@@ -58,6 +58,7 @@ MonoBehaviour:
   health: {fileID: 4360171234245687884}
   itemDrop: {fileID: -8060947122638671225}
   targetDetection: {fileID: -2093571716122270733}
+  visuals: {fileID: 6682308261332209649}
 --- !u!114 &4360171234245687884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +259,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 527725143542991785, guid: 155096f909f6ba243822faad2bb06e7e, type: 3}
       propertyPath: m_Name
-      value: Zombie
+      value: Visuals
       objectReference: {fileID: 0}
     - target: {fileID: 1700886128210957258, guid: 155096f909f6ba243822faad2bb06e7e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -310,3 +311,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1700886128210957258, guid: 155096f909f6ba243822faad2bb06e7e, type: 3}
   m_PrefabInstance: {fileID: 1335657477133504297}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6682308261332209649 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5635523292660908248, guid: 155096f909f6ba243822faad2bb06e7e, type: 3}
+  m_PrefabInstance: {fileID: 1335657477133504297}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99af13fa7bfeaf7429c92142c18a22a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

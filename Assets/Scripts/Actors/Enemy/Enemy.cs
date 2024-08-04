@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,9 @@ namespace Platformer
         [SerializeField] private HealthBase health;
         [SerializeField] private ItemDropBase itemDrop;
         [SerializeField] private TargetDetectionBase targetDetection;
+        [SerializeField] private EnemyVisuals visuals;
+
+        public event Action<bool> OnMove;
 
         private bool isEnabled;
 
@@ -20,6 +24,7 @@ namespace Platformer
         {
             itemDrop.Init(itemSpawner);
             movement.Init(moveSpeed);
+            visuals.Init(this);
             Enable();
         }
 
@@ -38,6 +43,10 @@ namespace Platformer
             if (targetDetection.Target != null)
             {
                 MoveToTarget();
+            }
+            else
+            {
+                NoMove();
             }
         }
 
@@ -64,6 +73,12 @@ namespace Platformer
             Vector2 direction = targetDetection.Target.position - transform.position;
             direction = direction.normalized;
             movement.Move(direction);
+            OnMove?.Invoke(true);
+        }
+
+        private void NoMove()
+        {
+            OnMove?.Invoke(false);
         }
 
         private void OnDeath()
