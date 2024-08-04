@@ -15,22 +15,28 @@ namespace Platformer
         [SerializeField] private ItemDropBase itemDrop;
         [SerializeField] private TargetDetectionBase targetDetection;
         [SerializeField] private EnemyVisuals visuals;
+        [SerializeField] private EnemyAudio enemyAudio;
 
         public event Action<bool> OnMove;
+        public event Action OnDeath;
 
+        private const float AUDIO_DESTROY_DELAY = 5f;
         private bool isEnabled;
 
-        public void Init(float moveSpeed, ItemSpawner itemSpawner)
+        public void Init(float moveSpeed, ItemSpawner itemSpawner, AudioPlayer audioPlayer)
         {
             itemDrop.Init(itemSpawner);
             movement.Init(moveSpeed);
             visuals.Init(this);
+            enemyAudio.Init(this, audioPlayer);
             Enable();
         }
 
         private void OnDestroy()
         {
             Disable();
+            enemyAudio.Disable();
+            Destroy(enemyAudio.gameObject, AUDIO_DESTROY_DELAY);
         }
 
         private void Update()
@@ -56,7 +62,7 @@ namespace Platformer
                 return;
 
             isEnabled = true;
-            health.OnDeath += OnDeath;
+            health.OnDeath += Die;
         }
 
         public void Disable()
@@ -65,7 +71,7 @@ namespace Platformer
                 return;
 
             isEnabled = false;
-            health.OnDeath -= OnDeath;
+            health.OnDeath -= Die;
         }
 
         private void MoveToTarget()
@@ -81,9 +87,10 @@ namespace Platformer
             OnMove?.Invoke(false);
         }
 
-        private void OnDeath()
+        private void Die()
         {
             itemDrop.DropItem();
+            OnDeath?.Invoke();
             Destroy(gameObject);
         }
     }
