@@ -15,16 +15,23 @@ namespace Platformer
             this.player = player;
 
             player.OnMove += AnimateMove;
+            player.OnShoot += AnimateShoot;
         }
 
         private void OnDestroy()
         {
             player.OnMove -= AnimateMove;
+            player.OnShoot -= AnimateShoot;
         }
 
         private void AnimateMove(bool isMoving)
         {
             animator.SetBool("isMoving", isMoving);
+        }
+
+        private void AnimateShoot()
+        {
+            animator.SetTrigger("isShooting");
         }
     }
 }

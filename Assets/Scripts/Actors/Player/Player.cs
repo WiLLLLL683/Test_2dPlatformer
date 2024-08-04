@@ -16,6 +16,7 @@ namespace Platformer
         [SerializeField] private PlayerVisuals visuals;
 
         public event Action<bool> OnMove;
+        public event Action OnShoot;
 
         private Input input;
         private bool isEnabled;
@@ -70,8 +71,16 @@ namespace Platformer
         {
             OnMove?.Invoke(false);
         }
-        private void ShootSingle() => singleAttack.Attack(transform.right * transform.localScale.x);
-        private void ShootBurst() => burstAttack.Attack(transform.right * transform.localScale.x);
+        private void ShootSingle()
+        {
+            singleAttack.Attack(transform.right * transform.localScale.x);
+            OnShoot?.Invoke();
+        }
+        private void ShootBurst()
+        {
+            burstAttack.Attack(transform.right * transform.localScale.x);
+            OnShoot?.Invoke();
+        }
         private void OnDeath() => Disable();
     }
 }
