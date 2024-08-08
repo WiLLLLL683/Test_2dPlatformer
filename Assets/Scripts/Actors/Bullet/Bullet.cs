@@ -35,10 +35,5 @@ namespace Platformer
 
             pool.Release(this);
         }
-
-        private void OnCollisionEnter2D(Collision2D collision)
-        {
-            pool.Release(this);
-        }
     }
 }

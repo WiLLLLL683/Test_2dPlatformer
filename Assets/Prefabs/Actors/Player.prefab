@@ -103,7 +103,7 @@ MonoBehaviour:
   consumeItemId: Bullet
   bulletPrefab: {fileID: 7683374911347875814, guid: 182008135dc073a4499247533cb51034, type: 3}
   gunPoint: {fileID: 1255543183775916943}
-  damage: 100
+  damage: 150
 --- !u!114 &6251089767089595006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119,7 +119,7 @@ MonoBehaviour:
   consumeItemId: Bullet
   bulletPrefab: {fileID: 7683374911347875814, guid: 182008135dc073a4499247533cb51034, type: 3}
   gunPoint: {fileID: 1255543183775916943}
-  damage: 100
+  damage: 30
   delay: 0.1
 --- !u!114 &5450233961025937160
 MonoBehaviour:

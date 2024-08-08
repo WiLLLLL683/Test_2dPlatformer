@@ -22,14 +22,15 @@ namespace Platformer
 
         private void FlipDirection(Vector2 inputDirection)
         {
+            inputDirection.y = 0;
             inputDirection = inputDirection.normalized;
-            int horizontalDirection = Mathf.CeilToInt(inputDirection.x);
+            //int horizontalDirection = Mathf.CeilToInt(inputDirection.x);
 
-            if (horizontalDirection == 0)
+            if (inputDirection.x == 0)
                 return;
 
             Vector3 scale = transform.localScale;
-            scale.x = Mathf.Abs(scale.x) * horizontalDirection;
+            scale.x = Mathf.Abs(scale.x) * inputDirection.x;
             transform.localScale = scale;
         }
     }
