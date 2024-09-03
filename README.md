@@ -31,7 +31,7 @@ This project was developed as part of a test assignment. The graphical assets we
 
 1. Download the [Build.rar](https://github.com/WiLLLLL683/Test_2dPlatformer/releases/latest/download/Build.rar) 
 file from latest release.
-2. Unpack zip archive.
+2. Unpack archive.
 3. Run the game with `Test_2dPlatformer.exe`.
 4. Controls: 
 	- WASD for movement
